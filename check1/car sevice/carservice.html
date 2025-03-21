@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Services Booking</title>
+  <link rel="stylesheet" href="caservce.css">
+</head>
+<body>
+  <h1>Car Services Booking</h1>
+  <form id="bookingForm">
+    <label for="service">Select a service:</label>
+    <select id="service" name="service">
+      <option value="Oil Change">Oil Change</option>
+      <option value="Tire Rotation">Tire Rotation</option>
+      <option value="Brake Inspection">Brake Inspection</option>
+      <option value="Car Wash">Car Wash</option>
+    </select>
+    <button type="submit">Book Service</button>
+  </form>
+
+  <div id="confirmation" style="display: none;">
+    <p id="confirmationMessage"></p>
+    <p id="costMessage"></p>
+  </div>
+
+  <script src="carservice.js"></script>
+</body>
+</html>
+

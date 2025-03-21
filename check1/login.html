@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <link rel="stylesheet" href="resigter1.html">
+</head>
+<body>
+    <div class="container" style=>
+        <h1 style="color: rgb(109, 232, 109); text-align: center;">User Login</h1>
+        <form id="loginForm" style="max-width: 300px; margin: 0 auto;">
+            <label for="loginEmail">Email:</label>
+            <input type="email" id="loginEmail" name="email" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="password" required style="width: 100%; padding: 8px; margin-bottom: 20px;"><br>
+            <button type="submit" style="width: 100%; padding: 10px; background-color: rgb(109, 232, 109); color: white; border: none; cursor: pointer;">Login</button>
+            <p>You Don't Have Account <a href="resigter1.html">register</a></p>
+        </form>
+        
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('loginForm');
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(loginForm);
+                const email = formData.get('email');
+                const password = formData.get('password');
+
+                try {
+                    const response = await fetch('http://localhost:3000/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    if (response.ok) {
+                        alert('Login successful');
+                        loginForm.reset();
+                        window.location.href = 'index.html';
+                    } else {
+                        const data = await response.json();
+                        alert(`Login failed: ${data.message}`);
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    alert('Login failed. Please try again.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

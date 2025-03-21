@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  form {
+    text-align: center;
+  }
+  
+  select, button {
+    margin: 10px;
+  }
+  
+  #confirmation {
+    text-align: center;
+  }
+  

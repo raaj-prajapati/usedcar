@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: rgb(109, 232, 109); text-align: center;">User Registration</h1>
+        <form id="registerForm" style="max-width: 300px; margin: 0 auto;">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required style="width: 100%; padding: 8px; margin-bottom: 20px;"><br>
+            <button type="submit" style="width: 100%; padding: 10px; background-color: rgb(109, 232, 109); color: white; border: none; cursor: pointer;">Register</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const registerForm = document.getElementById('registerForm');
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(registerForm);
+                const email = formData.get('email');
+                const password = formData.get('password');
+
+                try {
+                    const response = await fetch('http://localhost:3000/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    if (response.ok) {
+                        alert('Registration successful');
+                        registerForm.reset();
+                        window.location.href = 'login.html';
+                    } else {
+                        const data = await response.json();
+                        alert(`Registration failed: ${data.message}`);
+                    }
+                } catch (error) {
+                    console.error('Registration error:', error);
+                    alert('Registration failed. Please try again.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
